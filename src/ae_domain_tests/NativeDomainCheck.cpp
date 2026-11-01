@@ -1,4 +1,4 @@
-#include "AE/Core/NumericalDomainFactory.h"
+#include "AE/Core/NumericalDomain.h"
 #include <iostream>
 #include <stdexcept>
 using namespace SVF;

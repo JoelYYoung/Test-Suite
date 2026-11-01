@@ -1,5 +1,5 @@
 // Standalone preparation fixture; not evidence of AE integration correctness.
-#include "AE/Core/InitializationDomain.h"
+#include "AE/Core/BoxAddressDomain.h"
 
 #include <iostream>
 #include <stdexcept>

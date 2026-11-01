@@ -1,6 +1,6 @@
 // Differential storage test. The oracle is the frozen total-map semantics,
 // deliberately independent of the candidate's page and bit encoding.
-#include "AE/Core/InitializationDomain.h"
+#include "AE/Core/BoxAddressDomain.h"
 #include <algorithm>
 #include <iostream>
 #include <limits>
