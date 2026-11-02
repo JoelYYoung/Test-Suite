@@ -712,6 +712,10 @@ if(TARGET AbstractDomainCore)
     target_link_libraries(ae-${check} PRIVATE AbstractDomainCore)
     add_test(NAME aetest/${check} COMMAND ae-${check})
   endforeach()
+  add_test(NAME aetest/initialization-invalid
+    COMMAND ${CMAKE_COMMAND}
+      -DEXECUTABLE=$<TARGET_FILE:ae-initialization-contract>
+      -P ${CMAKE_CURRENT_SOURCE_DIR}/src/ae_domain_tests/initialization-invalid.cmake)
   get_target_property(ae_domain_sources AbstractDomainCore SOURCES)
   if("${ae_domain_sources}" MATCHES "OctagonDomain.cpp")
     foreach(check IN ITEMS NativeDomainCheck OctagonObjectCheck)

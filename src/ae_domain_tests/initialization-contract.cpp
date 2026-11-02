@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <string>
 
 using namespace SVF;
 
@@ -12,10 +13,16 @@ static void require(bool condition, const char* message)
         throw std::runtime_error(message);
 }
 
-int main()
+int main(int argc, char** argv)
 {
     using State = InitializationState;
     using Domain = InitializationDomain;
+    if (argc == 2 && std::string(argv[1]) == "--invalid-state")
+    {
+        std::cerr << "checking invalid initialization state" << std::endl;
+        Domain::uniform(static_cast<State>(4));
+        return 0;
+    }
     const Variable x(1), y(1000000);
     for (unsigned a = 0; a != 4; ++a)
     {
@@ -65,15 +72,5 @@ int main()
     require(top.isBottom(), "assign bottom");
     top.forget(x);
     require(top.isBottom(), "bottom remains unreachable");
-    bool rejected = false;
-    try
-    {
-        Domain::uniform(static_cast<State>(4));
-    }
-    catch (const std::invalid_argument&)
-    {
-        rejected = true;
-    }
-    require(rejected, "invalid state rejection");
     std::cout << "PASS: 16 uniform pairs and sparse/COW/branch contract checks\n";
 }
